@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LAD-VF</title>
+  <meta name="description" content="LAD-VF: LLM-Automatic Differentiation Enables Fine-Tuning-Free Robot Planning from Formal Methods Feedback" />
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+      color: #222;
+      background: #f2d9c1;
+    }
+
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 56px 20px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    h1 {
+      margin: 0 auto 6px;
+      max-width: 980px;
+      font-size: clamp(3.2rem, 8vw, 6rem);
+      line-height: 1;
+      font-weight: 500;
+      letter-spacing: -0.04em;
+      color: #222;
+    }
+
+    .subtitle {
+      margin: 0 auto 16px;
+      max-width: 900px;
+      font-size: clamp(1.15rem, 2.4vw, 1.75rem);
+      line-height: 1.25;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      color: #333;
+    }
+
+    .venue {
+      margin: 0 auto 14px;
+      max-width: 900px;
+      font-size: 1.08rem;
+      font-weight: 600;
+      color: #222;
+    }
+
+    .authors {
+      margin: 0 auto 8px;
+      max-width: 900px;
+      font-size: 1.08rem;
+      line-height: 1.7;
+    }
+
+    .authors a {
+      color: #3273dc;
+      text-decoration: none;
+    }
+
+    .authors a:hover {
+      text-decoration: underline;
+    }
+
+    .affiliations,
+    .notes {
+      margin: 0 auto;
+      max-width: 900px;
+      color: #444;
+      font-size: 0.98rem;
+      line-height: 1.55;
+    }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      border-radius: 999px;
+      color: #fff;
+      background: #363636;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.98rem;
+    }
+
+    .button svg,
+    .button img {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 auto;
+    }
+
+    .button svg {
+      fill: currentColor;
+    }
+
+    .button img {
+      object-fit: contain;
+    }
+
+    .button:hover {
+      background: #222;
+    }
+
+    section {
+      margin: 28px 0;
+      padding: 28px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: 1.55rem;
+      font-weight: 500;
+      color: #222;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    video {
+      display: block;
+      width: 100%;
+      margin-top: 14px;
+      border-radius: 8px;
+      background: #000;
+    }
+
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      color: #555;
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>LAD-VF</h1>
+      <p class="subtitle">LLM-Automatic Differentiation Enables Fine-Tuning-Free Robot Planning from Formal Methods Feedback</p>
+      <p class="venue">Published at ICRA 2026</p>
+
+      <p class="authors">
+        Yunhao Yang<sup>1</sup>,
+        Junyuan Hong<sup>1</sup>,
+        Gabriel Jacob Perin<sup>2</sup>,
+        Zhiwen Fan<sup>3</sup>,
+        Li Yin<sup>4</sup>,
+        Zhangyang Wang<sup>1</sup>,
+        Ufuk Topcu<sup>1</sup>
+      </p>
+
+      <p class="affiliations">
+        <sup>1</sup>University of Texas at Austin &nbsp;&nbsp;
+        <sup>2</sup>University of São Paulo &nbsp;&nbsp;
+        <sup>3</sup>Texas A&amp;M University &nbsp;&nbsp;
+        <sup>4</sup>SylphAI
+      </p>
+
+      <nav class="links" aria-label="Project links">
+        <a class="button" href="https://arxiv.org/abs/2509.18384" target="_blank" rel="noopener" aria-label="Paper on arXiv">
+          <img src="assets/arxiv-logomark-small.png" alt="" aria-hidden="true" />
+          Paper
+        </a>
+        <a class="button" href="https://github.com/REPLACE-WITH-CODEBASE-LINK" target="_blank" rel="noopener" aria-label="Codebase on GitHub">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 .5A11.5 11.5 0 0 0 8.36 22.9c.58.1.79-.25.79-.56v-2.02c-3.23.7-3.91-1.39-3.91-1.39-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.04 1.76 2.72 1.25 3.38.96.1-.75.4-1.25.73-1.54-2.58-.29-5.29-1.29-5.29-5.74 0-1.27.45-2.3 1.2-3.12-.12-.29-.52-1.48.11-3.08 0 0 .98-.31 3.17 1.2a10.9 10.9 0 0 1 5.78 0c2.2-1.51 3.17-1.2 3.17-1.2.63 1.6.23 2.79.11 3.08.75.82 1.2 1.85 1.2 3.12 0 4.46-2.72 5.45-5.31 5.73.42.36.79 1.07.79 2.16v3.04c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z" />
+          </svg>
+          Codebase
+        </a>
+      </nav>
+    </header>
+
+    <section>
+      <h2>Abstract</h2>
+      <p>
+        Large language models (LLMs) can translate natural language instructions into executable action plans for robotics, autonomous driving, and other domains. Yet, deploying LLM-driven planning in the physical world demands strict adherence to safety and regulatory constraints, which current models often violate due to hallucination or weak alignment. Traditional data-driven alignment methods, such as Direct Preference Optimization (DPO), require costly human labeling, while recent formal-feedback approaches still depend on resource-intensive fine-tuning. In this paper, we propose LAD-VF, a fine-tuning-free framework that leverages formal verification feedback for automated prompt engineering. By introducing a formal-verification-informed text loss integrated with LLM-AutoDiff, LAD-VF iteratively refines prompts rather than model parameters. This yields three key benefits: scalable adaptation without fine-tuning; compatibility with modular LLM architectures; and interpretable refinement via auditable prompts. Experiments in robot navigation and manipulation tasks demonstrate that LAD-VF substantially enhances specification compliance, improving success rates from 60% to over 90%. Our method thus presents a scalable and interpretable pathway toward trustworthy, formally-verified LLM-driven control systems.
+      </p>
+    </section>
+
+    <section>
+      <h2>Video</h2>
+      <p>Demo video for LAD-VF.</p>
+      <video controls preload="metadata">
+        <source src="assets/demo.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </section>
+
+    <footer>
+      LAD-VF project page.
+    </footer>
+  </main>
+</body>
+</html>
