@@ -6,75 +6,82 @@
   <title>LAD-VF</title>
   <meta name="description" content="LAD-VF: LLM-Automatic Differentiation Enables Fine-Tuning-Free Robot Planning from Formal Methods Feedback" />
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.6;
-      color: #222;
-      background: #f2d9c1;
+    :root {
+      --text: #202124;
+      --muted: #5f6368;
+      --link: #1a73e8;
+      --line: #e5e7eb;
+      --button: #363636;
+      --max: 980px;
     }
 
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 16px;
+      line-height: 1.58;
+    }
+
+    a {
+      color: var(--link);
+      text-decoration: none;
+    }
+
+    a:hover { text-decoration: underline; }
+
     main {
-      max-width: 980px;
+      width: min(var(--max), calc(100% - 36px));
       margin: 0 auto;
-      padding: 56px 20px;
+      padding: 42px 0 48px;
     }
 
     header {
       text-align: center;
-      margin-bottom: 36px;
+      margin: 0 auto 34px;
     }
 
     h1 {
-      margin: 0 auto 6px;
-      max-width: 980px;
-      font-size: clamp(3.2rem, 8vw, 6rem);
-      line-height: 1;
+      margin: 0 0 8px;
+      font-size: clamp(3.0rem, 8vw, 5.4rem);
+      line-height: 1.0;
       font-weight: 500;
-      letter-spacing: -0.04em;
-      color: #222;
+      letter-spacing: -0.035em;
     }
 
     .subtitle {
-      margin: 0 auto 16px;
-      max-width: 900px;
-      font-size: clamp(1.15rem, 2.4vw, 1.75rem);
-      line-height: 1.25;
-      font-weight: 400;
-      letter-spacing: -0.02em;
+      max-width: 850px;
+      margin: 0 auto 14px;
       color: #333;
+      font-size: clamp(1.15rem, 2.2vw, 1.55rem);
+      line-height: 1.3;
+      font-weight: 400;
     }
 
     .venue {
       margin: 0 auto 14px;
-      max-width: 900px;
+      color: #333;
       font-size: 1.08rem;
       font-weight: 600;
-      color: #222;
     }
 
     .authors {
-      margin: 0 auto 8px;
       max-width: 900px;
-      font-size: 1.08rem;
-      line-height: 1.7;
+      margin: 0 auto 6px;
+      font-size: 1.02rem;
+      line-height: 1.65;
     }
 
-    .authors a {
-      color: #3273dc;
-      text-decoration: none;
-    }
-
-    .authors a:hover {
-      text-decoration: underline;
-    }
-
-    .affiliations,
-    .notes {
+    .affiliations {
+      max-width: 880px;
       margin: 0 auto;
-      max-width: 900px;
-      color: #444;
-      font-size: 0.98rem;
+      color: var(--muted);
+      font-size: 0.95rem;
       line-height: 1.55;
     }
 
@@ -83,72 +90,295 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 10px;
-      margin-top: 24px;
+      margin: 22px 0 18px;
+      padding: 0;
     }
 
     .button {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 8px 18px;
+      min-height: 36px;
+      padding: 7px 17px;
       border-radius: 999px;
       color: #fff;
-      background: #363636;
-      text-decoration: none;
+      background: var(--button);
+      font-size: 0.95rem;
       font-weight: 600;
-      font-size: 0.98rem;
+      text-decoration: none;
+    }
+
+    .button:hover {
+      background: #1f1f1f;
+      text-decoration: none;
     }
 
     .button svg,
     .button img {
-      width: 18px;
-      height: 18px;
+      width: 17px;
+      height: 17px;
+      object-fit: contain;
       flex: 0 0 auto;
     }
 
-    .button svg {
-      fill: currentColor;
+    .button svg { fill: currentColor; }
+
+    nav.toc {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px 18px;
+      margin: 14px auto 0;
+      color: var(--muted);
+      font-size: 0.95rem;
     }
 
-    .button img {
-      object-fit: contain;
-    }
-
-    .button:hover {
-      background: #222;
+    nav.toc a {
+      color: var(--muted);
+      text-decoration: underline;
+      text-underline-offset: 3px;
     }
 
     section {
-      margin: 28px 0;
-      padding: 28px;
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.72);
+      margin: 42px 0 0;
+      padding-top: 34px;
+      border-top: 1px solid var(--line);
     }
 
     h2 {
-      margin: 0 0 14px;
-      font-size: 1.55rem;
+      margin: 0 0 16px;
+      text-align: center;
+      font-size: clamp(1.55rem, 3vw, 2.0rem);
+      line-height: 1.22;
       font-weight: 500;
-      color: #222;
+      letter-spacing: -0.015em;
+    }
+
+    h3 {
+      margin: 0 0 6px;
+      font-size: 1.08rem;
+      line-height: 1.3;
+      font-weight: 600;
     }
 
     p {
-      margin: 0;
+      margin: 0 0 14px;
     }
 
+    p:last-child { margin-bottom: 0; }
+
+    .lead,
+    .section-text {
+      max-width: 850px;
+      margin-left: auto;
+      margin-right: auto;
+      color: #333;
+      font-size: 1.02rem;
+      line-height: 1.7;
+    }
+
+    .figure-block {
+      margin: 24px auto 0;
+      max-width: 960px;
+      text-align: center;
+    }
+
+    img.figure,
     video {
       display: block;
       width: 100%;
-      margin-top: 14px;
-      border-radius: 8px;
-      background: #000;
+      max-width: 100%;
+      margin: 0 auto;
+      border-radius: 4px;
+      background: #fff;
+    }
+
+    video { background: #000; }
+
+    .caption {
+      max-width: 900px;
+      margin: 9px auto 0;
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.45;
+      text-align: center;
+    }
+
+    .grid {
+      display: grid;
+      gap: 22px;
+      margin-top: 22px;
+    }
+
+    .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    .plain-card {
+      min-width: 0;
+      text-align: left;
+    }
+
+    .plain-card p {
+      color: var(--muted);
+      font-size: 0.96rem;
+      line-height: 1.58;
+    }
+
+    .metric {
+      text-align: center;
+    }
+
+    .metric strong {
+      display: block;
+      margin-bottom: 4px;
+      color: #222;
+      font-size: 2.05rem;
+      line-height: 1.05;
+      font-weight: 500;
+      letter-spacing: -0.03em;
+    }
+
+    .metric p {
+      max-width: 250px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.48;
+    }
+
+    .steps {
+      counter-reset: step;
+      margin-top: 22px;
+    }
+
+    .step {
+      position: relative;
+      padding-top: 34px;
+      text-align: center;
+    }
+
+    .step::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      color: #fff;
+      background: #444;
+      font-size: 0.85rem;
+      font-weight: 700;
+      line-height: 24px;
+      text-align: center;
+    }
+
+    .step p {
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.5;
+    }
+
+    .formula {
+      margin: 18px auto 0;
+      max-width: 850px;
+      text-align: center;
+    }
+
+    pre {
+      margin: 12px 0 0;
+      padding: 14px 16px;
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: #f7f7f7;
+      color: #222;
+      font-size: 0.9rem;
+      line-height: 1.45;
+      text-align: left;
+    }
+
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    }
+
+    .table-wrap {
+      width: 100%;
+      margin: 22px auto 0;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      min-width: 560px;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+      line-height: 1.35;
+    }
+
+    th, td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    th {
+      color: #333;
+      font-weight: 600;
+      border-top: 1px solid var(--line);
+      background: #fafafa;
+    }
+
+    td:first-child,
+    th:first-child { text-align: left; }
+
+    .best {
+      color: #000;
+      font-weight: 700;
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      margin-top: 22px;
     }
 
     footer {
-      margin-top: 40px;
+      margin-top: 46px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
       text-align: center;
-      color: #555;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 820px) {
+      main {
+        width: min(100% - 28px, var(--max));
+        padding-top: 30px;
+      }
+
+      h1 { font-size: clamp(2.8rem, 16vw, 4.6rem); }
+
+      .grid.two,
+      .grid.three,
+      .grid.four {
+        grid-template-columns: 1fr;
+      }
+
+      .plain-card,
+      .step {
+        text-align: center;
+      }
+
+      nav.toc {
+        gap: 8px 14px;
+      }
     }
   </style>
 </head>
@@ -188,26 +418,179 @@
           Codebase
         </a>
       </nav>
+
+      <nav class="toc" aria-label="Page sections">
+        <a href="#overview">Overview</a>
+        <a href="#method">Method</a>
+        <a href="#results">Results</a>
+        <a href="#robots">Robot demonstration</a>
+        <a href="#citation">Citation</a>
+      </nav>
     </header>
 
-    <section>
-      <h2>Abstract</h2>
-      <p>
-        Large language models (LLMs) can translate natural language instructions into executable action plans for robotics, autonomous driving, and other domains. Yet, deploying LLM-driven planning in the physical world demands strict adherence to safety and regulatory constraints, which current models often violate due to hallucination or weak alignment. Traditional data-driven alignment methods, such as Direct Preference Optimization (DPO), require costly human labeling, while recent formal-feedback approaches still depend on resource-intensive fine-tuning. In this paper, we propose LAD-VF, a fine-tuning-free framework that leverages formal verification feedback for automated prompt engineering. By introducing a formal-verification-informed text loss integrated with LLM-AutoDiff, LAD-VF iteratively refines prompts rather than model parameters. This yields three key benefits: scalable adaptation without fine-tuning; compatibility with modular LLM architectures; and interpretable refinement via auditable prompts. Experiments in robot navigation and manipulation tasks demonstrate that LAD-VF substantially enhances specification compliance, improving success rates from 60% to over 90%. Our method thus presents a scalable and interpretable pathway toward trustworthy, formally-verified LLM-driven control systems.
+    <section id="overview">
+      <h2>Planning with formal feedback, without fine-tuning</h2>
+      <p class="lead">
+        LAD-VF uses formal verification outcomes as feedback for automatic prompt optimization. Instead of updating model weights, it treats prompts as trainable textual variables, refines them through LLM-AutoDiff, and asks the LLM to produce robot-executable plans that satisfy temporal-logic safety specifications.
       </p>
+
+      <div class="figure-block">
+        <img class="figure" src="assets/figures/teaser.png" alt="Overview of the LAD-VF planning and verification pipeline" />
+        <p class="caption">The LLM generates a formal plan, the verifier checks it against safety specifications, and LAD-VF converts violations into textual feedback that improves the next prompt.</p>
+      </div>
     </section>
 
     <section>
-      <h2>Video</h2>
-      <p>Demo video for LAD-VF.</p>
-      <video controls preload="metadata">
-        <source src="assets/demo.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+      <h2>Why LAD-VF?</h2>
+      <div class="grid three">
+        <article class="plain-card">
+          <h3>Fine-tuning-free</h3>
+          <p>Improves safety compliance by optimizing prompts, avoiding expensive parameter updates and additional human preference labels.</p>
+        </article>
+        <article class="plain-card">
+          <h3>Verifier-grounded</h3>
+          <p>Uses model-checking feedback from temporal-logic specifications, turning formal violations into structured supervision.</p>
+        </article>
+        <article class="plain-card">
+          <h3>Auditable behavior changes</h3>
+          <p>Prompt refinements remain human-readable, making the optimization process easier to inspect than weight-level updates.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="method">
+      <h2>Method</h2>
+      <p class="section-text">
+        Given a task description and a set of prompts, the LLM produces a NuSMV-based plan. A model checker verifies the plan against safety specifications and returns which constraints were violated. LAD-VF defines a verification-informed textual loss from these failures and back-propagates it through the LLM-AutoDiff workflow to update the prompts.
+      </p>
+
+      <div class="grid four steps" aria-label="LAD-VF pipeline steps">
+        <div class="step">
+          <h3>Generate a plan</h3>
+          <p>The LLM maps a natural-language robot task into a formally verifiable plan.</p>
+        </div>
+        <div class="step">
+          <h3>Verify safety</h3>
+          <p>A model checker evaluates the plan against temporal-logic specifications.</p>
+        </div>
+        <div class="step">
+          <h3>Build text loss</h3>
+          <p>Specification violations become structured feedback for prompt improvement.</p>
+        </div>
+        <div class="step">
+          <h3>Update prompts</h3>
+          <p>LLM-AutoDiff refines the prompt, then the loop repeats until plans are safer.</p>
+        </div>
+      </div>
+
+      <div class="grid two" style="align-items: start;">
+        <div class="figure-block">
+          <img class="figure" src="assets/figures/prompt-example.png" alt="Step-by-step prompt optimization example" />
+          <p class="caption">A step-by-step example of prompt optimization for robot navigation.</p>
+        </div>
+        <div class="formula">
+          <h3>Example safety specification</h3>
+          <p>A navigation rule can be written as a temporal-logic formula:</p>
+          <pre><code>G(Pedestrian → F(Action = Stop))</code></pre>
+          <p style="margin-top: 12px;">Intuitively: always stop after a pedestrian is observed. LAD-VF uses violations of such formulas to improve the prompt automatically.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="results">
+      <h2>Results</h2>
+      <div class="grid three">
+        <div class="metric">
+          <strong>0.860</strong>
+          <p>LAD-VF test safety score after prompt optimization.</p>
+        </div>
+        <div class="metric">
+          <strong>0.950</strong>
+          <p>LAD-VF + ICL test safety score, matching fine-tuning-level compliance while remaining parameter-free.</p>
+        </div>
+        <div class="metric">
+          <strong>0.013</strong>
+          <p>Prompt+Spec test safety score when specifications are simply placed in the prompt.</p>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table aria-label="Safety score comparison">
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Validation safety score</th>
+              <th>Test safety score</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>RLVF</td><td>0.978 ± 0.032</td><td>0.978 ± 0.032</td></tr>
+            <tr><td>Prompt+Spec</td><td>0.156 ± 0.041</td><td>0.013 ± 0.013</td></tr>
+            <tr><td>ICL</td><td>0.825 ± 0.015</td><td>0.800 ± 0.021</td></tr>
+            <tr><td>LAD-VF (TextGrad)</td><td>0.725 ± 0.025</td><td>0.683 ± 0.024</td></tr>
+            <tr><td>LAD-VF</td><td>0.880 ± 0.075</td><td>0.860 ± 0.058</td></tr>
+            <tr><td class="best">LAD-VF + ICL</td><td class="best">0.950 ± 0.036</td><td class="best">0.950 ± 0.072</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grid two">
+        <div class="figure-block">
+          <img class="figure" src="assets/figures/safety_optimization_step.png" alt="Safety score over optimization steps" />
+          <p class="caption">Safety scores improve over iterative re-prompting steps.</p>
+        </div>
+        <div class="figure-block">
+          <img class="figure" src="assets/figures/safety_testing.png" alt="Specification-level safety improvement" />
+          <p class="caption">Specification-level satisfaction improves after optimization.</p>
+        </div>
+      </div>
+
+      <div class="figure-block">
+        <img class="figure" src="assets/figures/sample-size-accuracy-n-time.png" alt="Safety score and training time tradeoff versus sample size" />
+        <p class="caption">LAD-VF reaches strong safety scores with a favorable performance-efficiency trade-off compared with fine-tuning.</p>
+      </div>
+    </section>
+
+    <section id="robots">
+      <h2>Robot demonstration</h2>
+      <p class="section-text">
+        LAD-VF was evaluated on real robot deployments, including Jackal navigation, indoor delivery, and tabletop manipulation. The optimized prompts produce formally verified plans that transfer to execution without re-optimizing for each robot domain.
+      </p>
+
+      <div class="video-grid">
+        <div class="figure-block">
+          <video controls playsinline preload="metadata" poster="assets/demo-poster.jpg">
+            <source src="assets/demo-robot.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <p class="caption">Robot-demonstration clip.</p>
+        </div>
+      </div>
+
+      <div class="grid two">
+        <div class="figure-block">
+          <img class="figure" src="assets/figures/robot-demo-1.png" alt="Jackal Clearpath robot demonstration" />
+          <p class="caption">Jackal Clearpath navigation deployment.</p>
+        </div>
+        <div class="figure-block">
+          <img class="figure" src="assets/figures/robot-demo-2.png" alt="Indoor robot and robot arm demonstrations" />
+          <p class="caption">Out-of-domain indoor delivery and robot arm manipulation demonstrations.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="citation">
+      <h2>Citation</h2>
+      <pre><code>@article{yang2025ladvf,
+  title   = {LAD-VF: LLM-Automatic Differentiation Enables Fine-Tuning-Free Robot Planning from Formal Methods Feedback},
+  author  = {Yang, Yunhao and Hong, Junyuan and Perin, Gabriel Jacob and Fan, Zhiwen and Yin, Li and Wang, Zhangyang and Topcu, Ufuk},
+  journal = {arXiv preprint arXiv:2509.18384},
+  year    = {2025}
+}</code></pre>
     </section>
 
     <footer>
-      LAD-VF project page.
+      LAD-VF project page · ICRA 2026
     </footer>
   </main>
 </body>
