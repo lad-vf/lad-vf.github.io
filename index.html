@@ -341,11 +341,48 @@
       font-weight: 700;
     }
 
+    .results-layout {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+      margin-top: 22px;
+      align-items: start;
+    }
+
+    .results-layout .figure-block {
+      margin-top: 0;
+    }
+
+    .results-layout .caption {
+      font-size: 0.9rem;
+      line-height: 1.42;
+    }
+
+    .result-wide {
+      grid-column: 1 / -1;
+      width: min(560px, 100%);
+      justify-self: center;
+    }
+
     .video-grid {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 18px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
       margin-top: 22px;
+      align-items: start;
+    }
+
+    .video-card {
+      min-width: 0;
+    }
+
+    .video-card .figure-block {
+      margin-top: 0;
+    }
+
+    .video-card video {
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
     }
 
     footer {
@@ -367,7 +404,9 @@
 
       .grid.two,
       .grid.three,
-      .grid.four {
+      .grid.four,
+      .video-grid,
+      .results-layout {
         grid-template-columns: 1fr;
       }
 
@@ -534,7 +573,7 @@
         </table>
       </div>
 
-      <div class="grid two">
+      <div class="results-layout">
         <div class="figure-block">
           <img class="figure" src="assets/figures/safety_optimization_step.png" alt="Safety score over optimization steps" />
           <p class="caption">Safety scores improve over iterative re-prompting steps.</p>
@@ -543,11 +582,10 @@
           <img class="figure" src="assets/figures/safety_testing.png" alt="Specification-level safety improvement" />
           <p class="caption">Specification-level satisfaction improves after optimization.</p>
         </div>
-      </div>
-
-      <div class="figure-block">
-        <img class="figure" src="assets/figures/sample-size-accuracy-n-time.png" alt="Safety score and training time tradeoff versus sample size" />
-        <p class="caption">LAD-VF reaches strong safety scores with a favorable performance-efficiency trade-off compared with fine-tuning.</p>
+        <div class="figure-block result-wide">
+          <img class="figure" src="assets/figures/sample-size-accuracy-n-time.png" alt="Safety score and training time tradeoff versus sample size" />
+          <p class="caption">LAD-VF reaches strong safety scores with a favorable performance-efficiency trade-off compared with fine-tuning.</p>
+        </div>
       </div>
     </section>
 
@@ -557,13 +595,33 @@
         LAD-VF was evaluated on real robot deployments, including Jackal navigation, indoor delivery, and tabletop manipulation. The optimized prompts produce formally verified plans that transfer to execution without re-optimizing for each robot domain.
       </p>
 
-      <div class="video-grid">
-        <div class="figure-block">
-          <video controls playsinline preload="metadata" poster="assets/demo-poster.jpg">
-            <source src="assets/demo-robot.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-          <p class="caption">Robot-demonstration clip.</p>
+      <div class="video-grid" aria-label="Robot demonstration videos">
+        <div class="video-card">
+          <div class="figure-block">
+            <video controls playsinline preload="metadata">
+              <source src="assets/robot_demo_part_1_navigation.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <p class="caption">Navigation demo I.</p>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="figure-block">
+            <video controls playsinline preload="metadata">
+              <source src="assets/robot_demo_part_2_navigation.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <p class="caption">Navigation demo II.</p>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="figure-block">
+            <video controls playsinline preload="metadata">
+              <source src="assets/robot_demo_part_3_ood_blocks.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <p class="caption">Out-of-domain tabletop manipulation.</p>
+          </div>
         </div>
       </div>
 
@@ -581,11 +639,13 @@
 
     <section id="citation">
       <h2>Citation</h2>
-      <pre><code>@article{yang2025ladvf,
-  title   = {LAD-VF: LLM-Automatic Differentiation Enables Fine-Tuning-Free Robot Planning from Formal Methods Feedback},
-  author  = {Yang, Yunhao and Hong, Junyuan and Perin, Gabriel Jacob and Fan, Zhiwen and Yin, Li and Wang, Zhangyang and Topcu, Ufuk},
-  journal = {arXiv preprint arXiv:2509.18384},
-  year    = {2025}
+      <pre><code>@inproceedings{yang2026ladvf,
+  title     = {LAD-VF: LLM-Automatic Differentiation Enables Fine-Tuning-Free Robot Planning from Formal Methods Feedback},
+  author    = {Yang, Yunhao and Hong, Junyuan and Perin, Gabriel Jacob and Fan, Zhiwen and Yin, Li and Wang, Zhangyang and Topcu, Ufuk},
+  booktitle = {Proceedings of the IEEE International Conference on Robotics and Automation (ICRA)},
+  year      = {2026},
+  month     = {June},
+  address   = {Vienna, Austria}
 }</code></pre>
     </section>
 
